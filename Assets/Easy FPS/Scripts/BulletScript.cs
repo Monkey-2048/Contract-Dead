@@ -15,6 +15,8 @@ public class BulletScript : MonoBehaviour {
 	[Tooltip("Put Weapon layer and Player layer to ignore bullet raycast.")]
 	public LayerMask ignoreLayer;
 
+	[SerializeField]private int damage = 20;
+
 	/*
 	* Uppon bullet creation with this script attatched,
 	* bullet creates a raycast which searches for corresponding tags.
@@ -30,7 +32,7 @@ public class BulletScript : MonoBehaviour {
 				}
 				if(hit.transform.tag == "Zombie"){
 					ZombieHealth zombieHealth = hit.transform.GetComponent<ZombieHealth>();
-					zombieHealth.TakeDamage(10);
+					zombieHealth.TakeDamage(damage);
 					Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
 					Destroy(gameObject);
 				}

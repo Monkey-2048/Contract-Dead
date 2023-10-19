@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ZombieSpawnManager : MonoBehaviour
 {
-    public GameObject zombiePrefab;     // Reference to the zombie prefab to spawn.
-    public Transform player;             // Reference to the player's transform.
-    public float spawnRadius = 10.0f;    // Maximum distance from the player to spawn zombies.
-    public LayerMask groundLayer;        // Layer mask to check if a position is on the ground.
+    public GameObject[] zombiePrefabs;  // Array of zombie prefabs to choose from.
+    public Transform player;            // Reference to the player's transform.
+    public float spawnRadius = 10.0f;   // Maximum distance from the player to spawn zombies.
+    public LayerMask groundLayer;       // Layer mask to check if a position is on the ground.
 
     void Start()
     {
@@ -23,8 +23,11 @@ public class ZombieSpawnManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(randomPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, groundLayer))
         {
-            // Instantiate a zombie at the valid position.
-            GameObject zombie = Instantiate(zombiePrefab, hit.point, Quaternion.identity);
+            // Select a random zombie prefab from the array.
+            GameObject randomZombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
+
+            // Instantiate the chosen zombie prefab at the valid position.
+            GameObject zombie = Instantiate(randomZombiePrefab, hit.point, Quaternion.identity);
 
             // Optionally, add logic to make the zombies chase the player or follow a predefined path.
         }

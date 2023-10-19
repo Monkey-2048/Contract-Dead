@@ -12,6 +12,7 @@ public class ZombieAI : MonoBehaviour
     [SerializeField]private Transform Visuals;
     private NavMeshAgent agent;
     private Animator anim;
+    private ZombieHealth zombieHealth;
     private Vector3 roamPosition;
     private ZombieVisuals zombieVisuals;
     private float nextRoamTime;
@@ -19,14 +20,15 @@ public class ZombieAI : MonoBehaviour
     private float lastAttackTime;
     private float attackCooldown = 3.0f;
 
-    private enum ZombieState
+    public enum ZombieState
     {
         Roaming,
         Chasing,
-        Attacking
+        Attacking,
+        Dead
     }
 
-    private ZombieState currentState = ZombieState.Roaming;
+    public ZombieState currentState = ZombieState.Roaming;
 
     private void Start()
     {
@@ -34,6 +36,7 @@ public class ZombieAI : MonoBehaviour
         agent = GetComponent < NavMeshAgent>();
         anim = Visuals.GetComponent <Animator>();
         zombieVisuals = GetComponent<ZombieVisuals>();
+        zombieHealth = GetComponent<ZombieHealth>();
         nextRoamTime = Time.time + Random.Range(0, roamInterval); // Set initial roam time
         GetNewRoamPosition();
     }
@@ -41,6 +44,12 @@ public class ZombieAI : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(target.position, transform.position);
+
+        if (zombieHealth.IsDead())
+        {
+            currentState = ZombieState.Dead;
+            return;
+        }
 
         switch (currentState)
         {
@@ -80,6 +89,9 @@ public class ZombieAI : MonoBehaviour
 
     private void Roam()
     {
+        agent.speed = 3f;
+        SetAnimation("Walk", true);
+        SetAnimation("Attack", false);
         // Check if it's time to change roam destination
         if (Time.time >= nextRoamTime)
         {
@@ -103,18 +115,44 @@ public class ZombieAI : MonoBehaviour
 
     private void Chase()
     {
+        agent.speed = 5f;
+        SetAnimation("Walk", true);
+        SetAnimation("Attack", false);
         zombieVisuals.LookAtPlayer();
         agent.SetDestination(target.position);
     }
 
     private void Attack()
     {
+        SetAnimation("Walk", false);
+        SetAnimation("Attack", true);
         zombieVisuals.LookAtPlayer();
-        PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
-        if (playerHealth != null)
+        agent.isStopped = true;
+        Invoke("DamagePlayer", 2f);
+    }
+
+    private void DamagePlayer()
+    {
+        if (currentState == ZombieState.Attacking)
         {
-            playerHealth.TakeDamage(attackDamage);
+            PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
+        }
+
+        if (currentState != ZombieState.Dead)
+        {
+            agent.isStopped = false;
         }
         
     }
+
+    void SetAnimation(string paramName, bool value)
+    {
+        // Set the specified animation parameter
+        anim.SetBool(paramName, value);
+    }
+
 }

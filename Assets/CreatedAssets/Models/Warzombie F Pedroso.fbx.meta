@@ -13,17 +13,17 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: world_war_zombie_diffuse
-    second: {fileID: 2800000, guid: c099a9b832948e24c86d1d07c5bb2a67, type: 3}
+    second: {fileID: 2800000, guid: 555f0ae67f730134da1b746b6a421c7f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: world_war_zombie_normal
-    second: {fileID: 2800000, guid: baa4d8484cda8844e81027b2845c58cd, type: 3}
+    second: {fileID: 2800000, guid: f1d041ffd274ea448bd431198ca0ec46, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: world_war_zombie_specular
-    second: {fileID: 2800000, guid: c7de639e6b6659a448cb04f72eecc642, type: 3}
+    second: {fileID: 2800000, guid: 60df962207df5bf4490fd24461ed5612, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -119,7 +119,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
