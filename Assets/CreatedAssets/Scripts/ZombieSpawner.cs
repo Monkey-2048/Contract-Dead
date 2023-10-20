@@ -4,7 +4,7 @@ public class ZombieSpawnManager : MonoBehaviour
 {
     public GameObject[] zombiePrefabs;  // Array of zombie prefabs to choose from.
     public Transform player;            // Reference to the player's transform.
-    public float spawnRadius = 10.0f;   // Maximum distance from the player to spawn zombies.
+    public float spawnRadius = 50.0f;   // Maximum distance from the player to spawn zombies.
     public LayerMask groundLayer;       // Layer mask to check if a position is on the ground.
 
     void Start()
@@ -28,8 +28,6 @@ public class ZombieSpawnManager : MonoBehaviour
 
             // Instantiate the chosen zombie prefab at the valid position.
             GameObject zombie = Instantiate(randomZombiePrefab, hit.point, Quaternion.identity);
-
-            // Optionally, add logic to make the zombies chase the player or follow a predefined path.
         }
     }
 }
