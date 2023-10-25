@@ -19,6 +19,8 @@ public class PriestAI : MonoBehaviour
     private BossHealth health;
     private float lastAttackTime;
     private bool isAttacking;
+    [SerializeField] private AudioSource Footsteps;
+    [SerializeField] private AudioSource Roar;
 
     private void Start()
     {
@@ -66,6 +68,7 @@ public class PriestAI : MonoBehaviour
 
     private void ChasePlayer()
     {
+        Footsteps.Play();
         anim.SetBool("Walking", true);
         anim.SetBool("Idle", false);
         agent.isStopped = false;
@@ -75,6 +78,7 @@ public class PriestAI : MonoBehaviour
 
     private void AttackPunch()
     {
+        Roar.Play();
         anim.SetBool("Walking", false);
         agent.isStopped = true;
         isAttacking = true;
@@ -112,6 +116,7 @@ public class PriestAI : MonoBehaviour
 
     void RangedAttack()
     {
+        Roar.Play();
         anim.SetBool("Walking", false);
         agent.isStopped = true;
         isAttacking = true;

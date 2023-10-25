@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public PlayerDamaged OnPlayerDamaged;
     public static PlayerDied OnPlayerDied;
     public static event EventHandler OnPlayerDeath;
+    [SerializeField] private AudioSource HurtSound;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth -= damageAmount;
             Debug.Log("Heath Left : " + currentHealth);
+            HurtSound.Play();
 
             // Optional: Invoke events to notify listeners about damage
             OnPlayerDamaged?.Invoke(currentHealth);

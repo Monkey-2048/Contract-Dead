@@ -19,6 +19,8 @@ public class ZombieAI : MonoBehaviour
     [SerializeField]private int attackDamage = 10;
     private float lastAttackTime;
     private float attackCooldown = 3.0f;
+    [SerializeField] private AudioSource GrowlSound;
+    [SerializeField] private AudioSource AttackSound;
 
     public enum ZombieState
     {
@@ -134,6 +136,7 @@ public class ZombieAI : MonoBehaviour
         SetAnimation("Attack", false);
         zombieVisuals.LookAtPlayer();
         agent.SetDestination(target.position);
+        GrowlSound.Play();
     }
 
     private void Attack()
@@ -142,17 +145,20 @@ public class ZombieAI : MonoBehaviour
         SetAnimation("Attack", true);
         zombieVisuals.LookAtPlayer();
         agent.isStopped = true;
-        Invoke("DamagePlayer", 2f);
+        Invoke("DamagePlayer", 1f);
+        
     }
 
     private void DamagePlayer()
     {
+        
         if (currentState == ZombieState.Attacking)
         {
             PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(attackDamage);
+                AttackSound.Play();
             }
         }
 

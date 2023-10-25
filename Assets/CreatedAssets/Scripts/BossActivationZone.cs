@@ -9,6 +9,7 @@ public class BossActivationZone : MonoBehaviour
     public float activationRadius = 10f;  // Radius within which the boss activates.
 
     public static bool playerEnteredZone = false;
+    [SerializeField] private AudioSource RitualSound;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class BossActivationZone : MonoBehaviour
     {
         if (!playerEnteredZone)
         {
+            RitualSound.Play();
             // Check if the player is within the activation radius.
             Collider[] colliders = Physics.OverlapSphere(transform.position, activationRadius);
             foreach (Collider collider in colliders)
