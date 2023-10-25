@@ -31,15 +31,38 @@ public class BulletScript : MonoBehaviour {
 					Destroy(gameObject);
 				}
 				if(hit.transform.tag == "Zombie"){
+
 					ZombieHealth zombieHealth = hit.transform.GetComponent<ZombieHealth>();
-					zombieHealth.TakeDamage(damage);
-					Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+					if (zombieHealth != null)
+					{
+						if (!zombieHealth.IsDead())
+						{
+                            zombieHealth.TakeDamage(damage);
+                            Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                            Destroy(gameObject);
+                        }
+					}
+				}
+				if(hit.transform.tag == "Boss"){
+					if (BossActivationZone.playerEnteredZone)
+					{
+                        BossHealth bossHealth = hit.transform.GetComponent<BossHealth>();
+                        if (bossHealth != null)
+                        {
+                            if (!bossHealth.IsDead())
+                            {
+                                bossHealth.TakeDamage(damage);
+                                Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                            }
+                        }
+                    }
+					
 					Destroy(gameObject);
 				}
 			}		
 			Destroy(gameObject);
 		}
-		Destroy(gameObject, 0.1f);
+		Destroy(gameObject, 1f);
 	}
 
 }

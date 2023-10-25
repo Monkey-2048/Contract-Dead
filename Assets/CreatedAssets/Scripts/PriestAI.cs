@@ -1,22 +1,28 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CursedPriestAI : MonoBehaviour
+public class PriestAI : MonoBehaviour
 {
     public float attackRange = 2f;
+    public float ThrowRange = 6f;
     public int punchDamage = 20;
-    public int smashDamage = 30;
     public float attackCooldown = 3f;
+    public float throwForce = 10.0f;
+    public float throwCooldown = 5.0f;
+    private float lastThrowTime;
+    public Transform stoneSpawnPoint;
+    public GameObject stonePrefab;
 
-    public GameObject smashTriggerZone;
     private Transform player;
     private NavMeshAgent agent;
     private Animator anim;
+    private BossHealth health;
     private float lastAttackTime;
     private bool isAttacking;
 
     private void Start()
     {
+        health = GetComponent<BossHealth>();
         player = ZPlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
@@ -26,6 +32,12 @@ public class CursedPriestAI : MonoBehaviour
 
     private void Update()
     {
+        if (health.IsDead())
+        {
+            agent.isStopped = true;
+            return;
+        }
+
         if (!isAttacking)
         {
             ChasePlayer();
@@ -38,19 +50,17 @@ public class CursedPriestAI : MonoBehaviour
         {
             if (!isAttacking && Time.time - lastAttackTime >= attackCooldown)
             {
-                // Perform a random attack
-                int randomAttack = Random.Range(0, 2); // 0 for punch, 1 for smash
-                if (randomAttack == 0)
-                {
-                    // Punch attack
-                    AttackPunch();
-                }
-                else
-                {
-                    // Smash attack
-                    AttackPunch();
-                }
+                AttackPunch();
             }
+        }
+
+        if (distance <= ThrowRange)
+        {
+            if (!isAttacking && Time.time - lastThrowTime >= throwCooldown)
+            {
+                RangedAttack();
+            }
+            
         }
     }
 
@@ -100,26 +110,34 @@ public class CursedPriestAI : MonoBehaviour
 
     }
 
-    private void AttackSmash()
+    void RangedAttack()
     {
+        anim.SetBool("Walking", false);
         agent.isStopped = true;
         isAttacking = true;
-        anim.SetTrigger("JumpAttack");
-
-        // Enable the trigger zone to start dealing area damage during the smash animation
-        smashTriggerZone.SetActive(true);
-
-        // Wait for the animation to complete (you can adjust the delay based on your animation)
-        Invoke("EndSmashAttack", 1.0f);
+        anim.SetTrigger("Throw");
+        Invoke("ThrowStone", .8f);
     }
 
-    private void EndSmashAttack()
+    private void ThrowStone()
     {
-        // Disable the trigger zone after the animation is completed
-        smashTriggerZone.SetActive(false);
+        if (Time.time - lastThrowTime >= throwCooldown)
+        {
+            isAttacking = true;
+            agent.isStopped = true;
+            // Face the player.
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            transform.forward = directionToPlayer;
 
+            // Spawn and throw a stone.
+            GameObject stone = Instantiate(stonePrefab, stoneSpawnPoint.position, Quaternion.identity);
+            Rigidbody stoneRigidbody = stone.GetComponent<Rigidbody>();
+            stoneRigidbody.AddForce(directionToPlayer * throwForce, ForceMode.Impulse);
+        }
         isAttacking = false;
-        lastAttackTime = Time.time;
-        agent.isStopped = false;
+        lastThrowTime = Time.time;
+        agent.isStopped = true;
+
     }
+
 }

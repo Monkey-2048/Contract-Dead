@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 389102671112856209, guid: 60f0bcca8981fde49b9109e0945e8a42, type: 3}
+      propertyPath: m_WalkableMask
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2118806044727628157, guid: 60f0bcca8981fde49b9109e0945e8a42, type: 3}
       propertyPath: m_Name
       value: CopZombie

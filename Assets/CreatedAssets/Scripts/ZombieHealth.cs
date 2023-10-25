@@ -22,12 +22,20 @@ public class ZombieHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Dead = true;
-            animator.SetTrigger("Dead");
-            ZombieAI zombieAI = GetComponentInParent<ZombieAI>();
-            zombieAI.enabled = false;
-            Invoke("Die", 5f);
+            Death();
         }
+    }
+
+    public void Death()
+    {
+        Dead = true;
+        if (animator != null)
+        {
+            animator.SetTrigger("Dead");
+        }
+        ZombieAI zombieAI = GetComponentInParent<ZombieAI>();
+        zombieAI.enabled = false;
+        Invoke("Die", 5f);
     }
 
     private void Die()

@@ -11,6 +11,12 @@ public class ZombieSpawnManager : MonoBehaviour
     {
         // Spawn zombies periodically, you can adjust this as needed.
         InvokeRepeating("SpawnZombie", 5.0f, 10.0f);
+        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+    }
+
+    private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
+    {
+        gameObject.SetActive(false);
     }
 
     void SpawnZombie()
@@ -29,5 +35,10 @@ public class ZombieSpawnManager : MonoBehaviour
             // Instantiate the chosen zombie prefab at the valid position.
             GameObject zombie = Instantiate(randomZombiePrefab, hit.point, Quaternion.identity);
         }
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
     }
 }

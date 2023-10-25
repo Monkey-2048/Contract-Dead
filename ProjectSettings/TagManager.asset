@@ -9,6 +9,7 @@ TagManager:
   - BulletSpawn
   - Weapon
   - Zombie
+  - Boss
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -9,7 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public delegate void PlayerDamaged(int currentHealth);
     public delegate void PlayerDied();
     public PlayerDamaged OnPlayerDamaged;
-    public PlayerDied OnPlayerDied;
+    public static PlayerDied OnPlayerDied;
+    public static event EventHandler OnPlayerDeath;
 
     void Start()
     {
@@ -39,7 +41,8 @@ public class PlayerHealth : MonoBehaviour
         // Handle player death logic here (e.g., play death animation, respawn, or game over)
         // Optional: Invoke an event to notify listeners about the player's death
         OnPlayerDied?.Invoke();
-        gameObject.SetActive(false);
+        OnPlayerDeath?.Invoke(this, EventArgs.Empty);
+        Time.timeScale = 0;
     }
 
     // Function to restore the player's health
