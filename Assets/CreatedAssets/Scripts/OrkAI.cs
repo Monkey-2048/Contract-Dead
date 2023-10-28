@@ -6,13 +6,17 @@ using UnityEngine.AI;
 
 public class OrkAI : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float attackRange = 2.0f;
-    [SerializeField] private float attackCooldown = 3.0f;
+    [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private int attackDamage = 20;
     private Animator anim;
     private NavMeshAgent agent;
+    private OrkHealth orkHealth;
     private float animationSpeed = 2f;
+    public float rotationSpeed = 5.0f;
+    public GameObject creaturePrefab;
+    public Transform spawnPoint;
+    public int numberOfCreatures = 2;
 
     private Transform player;
     private float lastAttackTime;
@@ -31,6 +35,7 @@ public class OrkAI : MonoBehaviour
         player = ZPlayerManager.instance.player.transform;
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        orkHealth = GetComponent<OrkHealth>();
         lastAttackTime = Time.time;
         anim.speed = animationSpeed;
         currentState = OrkState.Idle;
@@ -38,6 +43,14 @@ public class OrkAI : MonoBehaviour
 
     private void Update()
     {
+
+        if (orkHealth.IsDead())
+        {
+            agent.isStopped = true;
+            enabled = false;
+            return;
+        }
+
         float distance = Vector3.Distance(player.position, transform.position);
 
         switch (currentState)
@@ -78,7 +91,7 @@ public class OrkAI : MonoBehaviour
                     int randomAttack = Random.Range(1, attackCount + 1);
                     anim.SetTrigger("Attack" + randomAttack);
                     lastAttackTime = Time.time;
-                    Invoke("DamagePlayer", 1f);
+                    Invoke("DamagePlayer", .1f);
                 }
                 else if (distance > attackRange)
                 {
@@ -108,6 +121,7 @@ public class OrkAI : MonoBehaviour
     {
         if (player != null && isChasing)
         {
+            LookAtPlayer();
             agent.isStopped = false;
             agent.SetDestination(player.position);
         }
@@ -123,5 +137,37 @@ public class OrkAI : MonoBehaviour
         isChasing = true;
         currentState = OrkState.Chasing;
         anim.SetTrigger("Run");
+    }
+
+    private void LookAtPlayer()
+    {
+        if (player != null)
+        {
+            // Calculate the direction to the player
+            Vector3 directionToPlayer = player.position - transform.position;
+
+            // Calculate the rotation needed to face the player
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly interpolate between the current rotation and the target rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    public void SpawnCreatures()
+    {
+        // Check if the spawn point and creature prefab are set.
+        if (creaturePrefab != null)
+        {
+            for (int i = 0; i < numberOfCreatures; i++)
+            {
+                // Calculate a random position near the spawn point.
+                Vector3 randomOffset = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
+                Vector3 spawnPosition = spawnPoint.position + randomOffset;
+
+                // Instantiate a creature at the calculated position.
+                GameObject newCreature = Instantiate(creaturePrefab, spawnPosition, spawnPoint.rotation);
+            }
+        }
     }
 }
