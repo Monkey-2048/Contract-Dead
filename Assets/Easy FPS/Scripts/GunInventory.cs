@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Ionic.Zip;
 
 public enum MenuStyle{
 	horizontal,vertical
@@ -33,10 +34,20 @@ public class GunInventory : MonoBehaviour {
 			print ("No guns in the inventory");
 	}
 
-	/*
+    private void Start()
+    {
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+    }
+
+    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
+    {
+		enabled = false;
+    }
+
+    /*
 	*Waits some time then calls for a waepon spawn
 	*/
-	IEnumerator SpawnWeaponUponStart(){
+    IEnumerator SpawnWeaponUponStart(){
 		yield return new WaitForSeconds (0.5f);
 		StartCoroutine("Spawn",0);
 	}

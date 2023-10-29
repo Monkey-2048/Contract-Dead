@@ -77,10 +77,28 @@ public class GunScript : MonoBehaviour {
 
 	private Vector2 gunFollowTimeVelocity;
 
-	/*
+	private bool IsEnabled;
+
+    /*
 	Update loop calling for methods that are descriped below where they are initiated.
 	*/
-	void Update(){
+
+    private void Start()
+    {
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+    }
+
+    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
+    {
+		if (!IsEnabled)
+		{
+			enabled = false;
+			IsEnabled = true;
+		}
+		
+	}
+
+    void Update(){
 
 		Animations();
 

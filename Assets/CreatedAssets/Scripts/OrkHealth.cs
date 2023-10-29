@@ -4,7 +4,7 @@ using UnityEngine;
 public class OrkHealth : MonoBehaviour
 {
     public int maxHealth = 100;  // Maximum health of the Ork
-    private int currentHealth;    // Current health of the Ork
+    public int currentHealth;    // Current health of the Ork
     private bool Dead;   // Event to trigger when the Ork dies
     private Animator anim;
     private OrkAI orkAI;

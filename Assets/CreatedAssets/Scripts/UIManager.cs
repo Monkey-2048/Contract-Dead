@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public void ReloadCurrentScene()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        string currentSceneIndex = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneIndex);
     }
 

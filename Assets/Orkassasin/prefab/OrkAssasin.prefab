@@ -5182,9 +5182,12 @@ GameObject:
   - component: {fileID: 95036879989758482}
   - component: {fileID: 1829158280636238448}
   - component: {fileID: 1765557118283029429}
+  - component: {fileID: 5935884800314192147}
+  - component: {fileID: 400072712807675203}
+  - component: {fileID: 7707246301500723529}
   m_Layer: 0
   m_Name: OrkAssasin
-  m_TagString: Untagged
+  m_TagString: Ork
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5205,6 +5208,7 @@ Transform:
   - {fileID: 4295099650582276}
   - {fileID: 4228970299381582}
   - {fileID: 4665487466181226}
+  - {fileID: 7859092380135481491}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95036879989758482
@@ -5240,10 +5244,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d74919c18559847be96db95531fecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
   attackRange: 2
   attackCooldown: 3
   attackDamage: 20
+  rotationSpeed: 5
+  creaturePrefab: {fileID: 116050692627755999, guid: 1525b4a4dcfb65f4c9098a9209a05642, type: 3}
+  spawnPoint: {fileID: 7859092380135481491}
+  numberOfCreatures: 4
 --- !u!195 &1765557118283029429
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5254,7 +5261,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -5266,6 +5273,54 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5935884800314192147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637584495559616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603e6fd3b5c922749939c39f5be43b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &400072712807675203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637584495559616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70873aff52af07a4f88a478fdb96b4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2000
+--- !u!136 &7707246301500723529
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637584495559616}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1645117210141060
 GameObject:
   m_ObjectHideFlags: 0
@@ -8072,4 +8127,35 @@ Transform:
   m_Children:
   - {fileID: 4423021336424072}
   m_Father: {fileID: 4295099650582276}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4775743764716989632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7859092380135481491}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7859092380135481491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775743764716989632}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4558266444110246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

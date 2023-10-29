@@ -6,10 +6,21 @@ public class MouseLookScript : MonoBehaviour {
 
 	[HideInInspector]
 	public Transform myCamera;
-	/*
+    /*
 	 * Hiding the cursor.
 	 */
-	void Awake(){
+
+    private void Start()
+    {
+        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+    }
+
+    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
+    {
+        enabled = false;
+    }
+
+    void Awake(){
 		Cursor.lockState = CursorLockMode.Locked;
 		myCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 	}
