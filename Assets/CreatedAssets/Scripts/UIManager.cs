@@ -11,6 +11,36 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
+    public void LoadContractOne()
+    {
+        SceneManager.LoadScene("Scene_A");
+    }
+    
+    public void LoadContractTwo()
+    {
+        SceneManager.LoadScene("DemoScene");
+    }
+
+    public void LoadContractAll()
+    {
+        SceneManager.LoadScene("ContractsAll");
+    }
+
+    public void LoadContractLocked()
+    {
+        SceneManager.LoadScene("ContractsLocked");
+    }
+
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+    
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     public void QuitGame()
     {
         Application.Quit();

@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/CreatedAssets/Scenes/MainMenu.unity
+    guid: 625ae7aaa11ab7c4e9568f9580fbbdb4
+  - enabled: 1
+    path: Assets/CreatedAssets/Scenes/ContractsLocked.unity
+    guid: fdfd3c75c6232e34eb647db1f92716df
+  - enabled: 1
+    path: Assets/Flooded_Grounds/Scenes/Scene_A.unity
+    guid: c0d944ca9defd20449bc336e50d75a08
+  - enabled: 1
+    path: Assets/CreatedAssets/Scenes/ContractsAll.unity
+    guid: 09e786fb3e351e642866b95a7bf1fe4b
+  - enabled: 1
     path: Assets/Sun_Temple/Scenes/DemoScene.unity
     guid: d8f213b28287d8b4dab42cf4a34f94e5
   m_configObjects: {}

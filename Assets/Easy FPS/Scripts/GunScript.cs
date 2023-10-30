@@ -90,11 +90,7 @@ public class GunScript : MonoBehaviour {
 
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
     {
-		if (!IsEnabled)
-		{
-			enabled = false;
-			IsEnabled = true;
-		}
+		
 		
 	}
 

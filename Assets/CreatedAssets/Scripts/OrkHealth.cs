@@ -8,6 +8,7 @@ public class OrkHealth : MonoBehaviour
     private bool Dead;   // Event to trigger when the Ork dies
     private Animator anim;
     private OrkAI orkAI;
+    public static event EventHandler OnOrkDeath;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class OrkHealth : MonoBehaviour
     void Die()
     {
         gameObject.SetActive(false); // Disable or remove the Ork GameObject
+        OnOrkDeath?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsDead()
