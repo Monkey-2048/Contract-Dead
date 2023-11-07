@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossActivationZone : MonoBehaviour
 {
     [SerializeField] private GameObject boss;  // Reference to the boss GameObject.
-    private BossHealth bossHealth;
+    private PriestHealth bossHealth;
     private PriestAI priestAI;
     [SerializeField] private GameObject bossHealthUI;
     public float activationRadius = 10f;  // Radius within which the boss activates.
@@ -13,7 +13,7 @@ public class BossActivationZone : MonoBehaviour
 
     private void Start()
     {
-        bossHealth = boss.GetComponent<BossHealth>();
+        bossHealth = boss.GetComponent<PriestHealth>();
         priestAI = boss.GetComponent<PriestAI>();
         bossHealth.enabled = false;
         priestAI.enabled = false;

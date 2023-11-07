@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
+    public static bool contractDefeated;
+
+    private void Start()
+    {
+        Instance = this;
+    }
+
     public void ReloadCurrentScene()
     {
         string currentSceneIndex = SceneManager.GetActiveScene().name;
@@ -13,22 +22,26 @@ public class UIManager : MonoBehaviour
 
     public void LoadContractOne()
     {
-        SceneManager.LoadScene("Scene_A");
+        SceneManager.LoadScene("FloodedGrounds");
     }
     
     public void LoadContractTwo()
     {
-        SceneManager.LoadScene("DemoScene");
+        SceneManager.LoadScene("SunTemple");
     }
 
-    public void LoadContractAll()
+    public void LoadContraacts()
     {
-        SceneManager.LoadScene("ContractsAll");
-    }
-
-    public void LoadContractLocked()
-    {
-        SceneManager.LoadScene("ContractsLocked");
+        if (contractDefeated)
+        {
+            // Load the "ContractsAll" scene
+            SceneManager.LoadScene("ContractsAll");
+        }
+        else
+        {
+            // Load the "ContractsLocked" scene
+            SceneManager.LoadScene("ContractsLocked");
+        }
     }
 
     public void LoadCredits()
@@ -38,7 +51,7 @@ public class UIManager : MonoBehaviour
     
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("Credits");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()

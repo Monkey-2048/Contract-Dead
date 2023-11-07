@@ -10,8 +10,8 @@ public class ZombieSpawnManager : MonoBehaviour
     void Start()
     {
         // Spawn zombies periodically, you can adjust this as needed.
-        InvokeRepeating("SpawnZombie", 5.0f, 10.0f);
-        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        InvokeRepeating("SpawnZombie", 5.0f, 5.0f);
+        PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
     }
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
@@ -21,9 +21,12 @@ public class ZombieSpawnManager : MonoBehaviour
 
     void SpawnZombie()
     {
-        // Calculate a random position within the spawnRadius.
-        Vector3 randomPosition = Random.insideUnitSphere * spawnRadius;
-        randomPosition += player.position;
+        // Calculate a random position in front of the player within the spawnRadius.
+        Vector3 playerForward = player.forward;
+        Vector3 randomPosition = player.position + playerForward * spawnRadius;
+
+        // Add some randomness to the position to make it more varied.
+        randomPosition += Random.insideUnitSphere * 10.0f; // Tweak this value as needed.
 
         // Ensure the position is on the ground.
         RaycastHit hit;
@@ -36,6 +39,7 @@ public class ZombieSpawnManager : MonoBehaviour
             GameObject zombie = Instantiate(randomZombiePrefab, hit.point, Quaternion.identity);
         }
     }
+
 
     void OnDisable()
     {

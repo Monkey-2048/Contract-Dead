@@ -34,16 +34,6 @@ public class GunInventory : MonoBehaviour {
 			print ("No guns in the inventory");
 	}
 
-    private void Start()
-    {
-        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
-    }
-
-    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
-    {
-		enabled = false;
-    }
-
     /*
 	*Waits some time then calls for a waepon spawn
 	*/

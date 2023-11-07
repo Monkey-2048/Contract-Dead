@@ -16,7 +16,7 @@ public class PriestAI : MonoBehaviour
     private Transform player;
     private NavMeshAgent agent;
     private Animator anim;
-    private BossHealth health;
+    private PriestHealth health;
     private float lastAttackTime;
     private bool isAttacking;
     [SerializeField] private AudioSource Footsteps;
@@ -24,7 +24,7 @@ public class PriestAI : MonoBehaviour
 
     private void Start()
     {
-        health = GetComponent<BossHealth>();
+        health = GetComponent<PriestHealth>();
         player = ZPlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();

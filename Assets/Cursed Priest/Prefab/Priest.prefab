@@ -1634,8 +1634,8 @@ GameObject:
   - component: {fileID: 7232730286969761241}
   - component: {fileID: 8959154611594632897}
   - component: {fileID: 2738458919593709172}
-  - component: {fileID: 620443837134259493}
   - component: {fileID: 5942923426647127243}
+  - component: {fileID: 4348636729153901750}
   m_Layer: 0
   m_Name: Priest
   m_TagString: Boss
@@ -1729,20 +1729,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &620443837134259493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4363578991983522480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1770a40f8be087448d1ada3e2e9a71d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5000
-  currentHealth: 0
 --- !u!136 &5942923426647127243
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1766,6 +1752,20 @@ CapsuleCollider:
   m_Height: 2.3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4348636729153901750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363578991983522480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620bb925682268041960d5f4c59e5ff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  currentHealth: 0
 --- !u!1 &4514782077138980834
 GameObject:
   m_ObjectHideFlags: 0

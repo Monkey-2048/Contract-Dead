@@ -12,8 +12,14 @@ public class WinLoseUI : MonoBehaviour
     {
         WinUI.gameObject.SetActive(false);
         LoseUI.gameObject.SetActive(false);
-        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
         PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
+        OrkHealth.OnOrkDeath += OrkHealth_OnOrkDeath;
+    }
+
+    private void OrkHealth_OnOrkDeath(object sender, System.EventArgs e)
+    {
+        Invoke("ActivateWin", 8f);
     }
 
     private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
@@ -34,5 +40,14 @@ public class WinLoseUI : MonoBehaviour
         Cursor.visible = true;
         WinUI.gameObject.SetActive(true);
     }
+
+
+    private void OnDisable()
+    {
+        PriestHealth.OnBossDeath -= BossHealth_OnBossDeath;
+        PlayerHealth.OnPlayerDeath -= PlayerHealth_OnPlayerDeath;
+        OrkHealth.OnOrkDeath -= OrkHealth_OnOrkDeath;
+    }
+
 
 }

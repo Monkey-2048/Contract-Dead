@@ -46,7 +46,7 @@ public class BulletScript : MonoBehaviour {
 				if(hit.transform.tag == "Boss"){
 					if (BossActivationZone.playerEnteredZone)
 					{
-                        BossHealth bossHealth = hit.transform.GetComponent<BossHealth>();
+                        PriestHealth bossHealth = hit.transform.GetComponent<PriestHealth>();
                         if (bossHealth != null)
                         {
                             if (!bossHealth.IsDead())

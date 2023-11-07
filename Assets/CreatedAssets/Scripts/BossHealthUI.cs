@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Image healthFillImage; // Reference to the UI Image component representing the health bar fill.
-    public BossHealth bossHealth; // Reference to the BossHealth script.
+    public PriestHealth bossHealth; // Reference to the BossHealth script.
 
     private void Start()
     {
@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
             Debug.LogError("HealthBar is missing references to healthFillImage or bossHealth.");
             enabled = false; // Disable the script if references are missing.
         }
-        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
     }
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
@@ -24,8 +24,12 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        // Update the health bar fill amount based on the boss's current health.
-        UpdateHealthBarFill();
+        if (healthFillImage == null || bossHealth == null)
+        {
+            // Update the health bar fill amount based on the boss's current health.
+            UpdateHealthBarFill();
+        }
+        
     }
 
     private void UpdateHealthBarFill()

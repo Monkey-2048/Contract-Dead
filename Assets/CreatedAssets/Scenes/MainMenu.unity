@@ -1426,7 +1426,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 516768700}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: LoadContractLocked
+        m_MethodName: LoadContraacts
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

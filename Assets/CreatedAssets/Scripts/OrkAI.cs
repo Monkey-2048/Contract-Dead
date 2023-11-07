@@ -113,8 +113,8 @@ public class OrkAI : MonoBehaviour
                 playerHealth.TakeDamage(attackDamage);
             }
         }
-        
-        EndAttack();
+
+        Invoke("EndAttack", .5f);
     }
 
     private void ChasePlayer()

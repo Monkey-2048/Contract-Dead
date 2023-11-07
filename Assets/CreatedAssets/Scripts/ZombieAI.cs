@@ -41,7 +41,7 @@ public class ZombieAI : MonoBehaviour
         zombieHealth = GetComponent<ZombieHealth>();
         nextRoamTime = Time.time + Random.Range(0, roamInterval); // Set initial roam time
         GetNewRoamPosition();
-        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
     }
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)

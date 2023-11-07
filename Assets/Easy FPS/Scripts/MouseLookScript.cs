@@ -10,16 +10,6 @@ public class MouseLookScript : MonoBehaviour {
 	 * Hiding the cursor.
 	 */
 
-    private void Start()
-    {
-        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
-    }
-
-    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
-    {
-        enabled = false;
-    }
-
     void Awake(){
 		Cursor.lockState = CursorLockMode.Locked;
 		myCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -31,18 +21,22 @@ public class MouseLookScript : MonoBehaviour {
 	*/
 	void  Update(){
 
-		MouseInputMovement();
+		if (Time.timeScale != 0)
+		{
+            MouseInputMovement();
 
-		if (Input.GetKeyDown (KeyCode.L)) {
-			Cursor.lockState = CursorLockMode.Locked;
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
 
-		}
-		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+            }
+            deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 
-		if(GetComponent<PlayerMovementScript>().currentSpeed > 1)
-			HeadMovement ();
+            if (GetComponent<PlayerMovementScript>().currentSpeed > 1)
+                HeadMovement();
+        }
 
-	}
+    }
 
 	[Header("Z Rotation Camera")]
 	[HideInInspector] public float timer;

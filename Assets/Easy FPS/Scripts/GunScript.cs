@@ -83,34 +83,23 @@ public class GunScript : MonoBehaviour {
 	Update loop calling for methods that are descriped below where they are initiated.
 	*/
 
-    private void Start()
-    {
-        PlayerHealth.OnPlayerDeath += PlayerHealth_OnPlayerDeath;
-    }
-
-    private void PlayerHealth_OnPlayerDeath(object sender, System.EventArgs e)
-    {
-		
-		
-	}
-
     void Update(){
+        if (Time.timeScale != 0)
+		{
+            Animations();
 
-		Animations();
+            GiveCameraScriptMySensitvity();
 
-		GiveCameraScriptMySensitvity();
+            PositionGun();
 
-		PositionGun();
+            Shooting();
+            MeeleAttack();
+            LockCameraWhileMelee();
 
-		Shooting();
-		MeeleAttack();
-		LockCameraWhileMelee ();
+            Sprint(); //iff we have the gun you sprint from here, if we are gunless then its called from movement script
 
-		Sprint(); //iff we have the gun you sprint from here, if we are gunless then its called from movement script
-
-		CrossHairExpansionWhenWalking();
-
-
+            CrossHairExpansionWhenWalking();
+        }
 	}
 
 	/*
@@ -271,21 +260,23 @@ public class GunScript : MonoBehaviour {
 	 * After calculation the recoil amount are decreased to 0.
 	 */
 	void PositionGun(){
-		transform.position = Vector3.SmoothDamp(transform.position,
-			mainCamera.transform.position  - 
-			(mainCamera.transform.right * (currentGunPosition.x + currentRecoilXPos)) + 
-			(mainCamera.transform.up * (currentGunPosition.y+ currentRecoilYPos)) + 
-			(mainCamera.transform.forward * (currentGunPosition.z + currentRecoilZPos)),ref velV, 0);
+		if (Time.timeScale != 0) {
+            transform.position = Vector3.SmoothDamp(transform.position,
+            mainCamera.transform.position -
+            (mainCamera.transform.right * (currentGunPosition.x + currentRecoilXPos)) +
+            (mainCamera.transform.up * (currentGunPosition.y + currentRecoilYPos)) +
+            (mainCamera.transform.forward * (currentGunPosition.z + currentRecoilZPos)), ref velV, 0);
 
 
 
-		pmS.cameraPosition = new Vector3(currentRecoilXPos,currentRecoilYPos, 0);
+            pmS.cameraPosition = new Vector3(currentRecoilXPos, currentRecoilYPos, 0);
 
-		currentRecoilZPos = Mathf.SmoothDamp(currentRecoilZPos, 0, ref velocity_z_recoil, recoilOverTime_z);
-		currentRecoilXPos = Mathf.SmoothDamp(currentRecoilXPos, 0, ref velocity_x_recoil, recoilOverTime_x);
-		currentRecoilYPos = Mathf.SmoothDamp(currentRecoilYPos, 0, ref velocity_y_recoil, recoilOverTime_y);
+            currentRecoilZPos = Mathf.SmoothDamp(currentRecoilZPos, 0, ref velocity_z_recoil, recoilOverTime_z);
+            currentRecoilXPos = Mathf.SmoothDamp(currentRecoilXPos, 0, ref velocity_x_recoil, recoilOverTime_x);
+            currentRecoilYPos = Mathf.SmoothDamp(currentRecoilYPos, 0, ref velocity_y_recoil, recoilOverTime_y);
 
-	}
+        }
+    }
 
 
 	[Header("Rotation")]

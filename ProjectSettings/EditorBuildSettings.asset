@@ -12,12 +12,15 @@ EditorBuildSettings:
     path: Assets/CreatedAssets/Scenes/ContractsLocked.unity
     guid: fdfd3c75c6232e34eb647db1f92716df
   - enabled: 1
-    path: Assets/Flooded_Grounds/Scenes/Scene_A.unity
+    path: Assets/CreatedAssets/Scenes/FloodedGrounds.unity
     guid: c0d944ca9defd20449bc336e50d75a08
   - enabled: 1
     path: Assets/CreatedAssets/Scenes/ContractsAll.unity
     guid: 09e786fb3e351e642866b95a7bf1fe4b
   - enabled: 1
-    path: Assets/Sun_Temple/Scenes/DemoScene.unity
+    path: Assets/CreatedAssets/Scenes/SunTemple.unity
     guid: d8f213b28287d8b4dab42cf4a34f94e5
+  - enabled: 1
+    path: Assets/CreatedAssets/Scenes/Credits.unity
+    guid: 276d6e02c9351c84d8b011ccb90b6cfe
   m_configObjects: {}

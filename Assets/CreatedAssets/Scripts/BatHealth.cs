@@ -9,6 +9,12 @@ public class BatHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth; // Initialize current health to max health
+        OrkHealth.OnOrkDeath += OrkHealth_OnOrkDeath;
+    }
+
+    private void OrkHealth_OnOrkDeath(object sender, System.EventArgs e)
+    {
+        Die();
     }
 
     // Function to allow other scripts to damage the bat

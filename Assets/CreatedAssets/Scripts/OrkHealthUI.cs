@@ -14,7 +14,7 @@ public class OrkHealthUI : MonoBehaviour
             Debug.LogError("HealthBar is missing references to healthFillImage or bossHealth.");
             enabled = false; // Disable the script if references are missing.
         }
-        BossHealth.OnBossDeath += BossHealth_OnBossDeath;
+        PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
     }
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
