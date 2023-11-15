@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 699575069781218300}
   - component: {fileID: 7409655863642581917}
   - component: {fileID: 3848152319893767466}
+  - component: {fileID: 6837752189906311101}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Bat
@@ -116,7 +117,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 4
+  m_BaseOffset: 5.56
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3848152319893767466
@@ -132,6 +133,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+--- !u!114 &6837752189906311101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116050692627755999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 603e6fd3b5c922749939c39f5be43b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &293473976206170328
 GameObject:
   m_ObjectHideFlags: 0

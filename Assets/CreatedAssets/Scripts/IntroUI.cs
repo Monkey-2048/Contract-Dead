@@ -6,10 +6,11 @@ public class IntroUI : MonoBehaviour
 {
     public GameObject IntroPanel;
     public GameObject TutorialPanel;
-    private bool IntroActive = true;
+    private static bool IntroActive = true;
 
     void Start()
     {
+        IntroActive = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         // Initialize the tutorial state
@@ -25,10 +26,18 @@ public class IntroUI : MonoBehaviour
             IntroPanel.SetActive(false);
             TutorialPanel.SetActive(true);
 
-            // Unpause the game
+
             Time.timeScale = 0;
 
             IntroActive = false;
         }
     }
+
+    
+
+    public static bool isActive()
+    {
+        return IntroActive;
+    }
+
 }

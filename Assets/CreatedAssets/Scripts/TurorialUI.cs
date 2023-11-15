@@ -6,10 +6,11 @@ public class TurorialUI : MonoBehaviour
 {
     public GameObject tutorialPanel;
 
-    private bool tutorialActive = true;
+    private static bool tutorialActive = true;
 
     void Start()
     {
+        tutorialActive = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         // Initialize the tutorial state
@@ -32,4 +33,12 @@ public class TurorialUI : MonoBehaviour
             tutorialActive = false;
         }
     }
+
+
+
+    public static bool isActive()
+    {
+        return tutorialActive;
+    }
+
 }

@@ -16,33 +16,42 @@ public class ZombieSpawnManager : MonoBehaviour
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
     {
-        gameObject.SetActive(false);
+        if (enabled)
+        {
+            gameObject.SetActive(false);
+        }
+        
     }
 
     void SpawnZombie()
     {
-        // Calculate a random position in front of the player within the spawnRadius.
-        Vector3 playerForward = player.forward;
-        Vector3 randomPosition = player.position + playerForward * spawnRadius;
-
-        // Add some randomness to the position to make it more varied.
-        randomPosition += Random.insideUnitSphere * 10.0f; // Tweak this value as needed.
-
-        // Ensure the position is on the ground.
-        RaycastHit hit;
-        if (Physics.Raycast(randomPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, groundLayer))
+        if (enabled)
         {
-            // Select a random zombie prefab from the array.
-            GameObject randomZombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
+            // Calculate a random position in front of the player within the spawnRadius.
+            Vector3 playerForward = player.forward;
+            Vector3 randomPosition = player.position + playerForward * spawnRadius;
 
-            // Instantiate the chosen zombie prefab at the valid position.
-            GameObject zombie = Instantiate(randomZombiePrefab, hit.point, Quaternion.identity);
+            // Add some randomness to the position to make it more varied.
+            randomPosition += Random.insideUnitSphere * 10.0f; // Tweak this value as needed.
+
+            // Ensure the position is on the ground.
+            RaycastHit hit;
+            if (Physics.Raycast(randomPosition + Vector3.up * 10.0f, Vector3.down, out hit, Mathf.Infinity, groundLayer))
+            {
+                // Select a random zombie prefab from the array.
+                GameObject randomZombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
+
+                // Instantiate the chosen zombie prefab at the valid position.
+                GameObject zombie = Instantiate(randomZombiePrefab, hit.point, Quaternion.identity);
+            }
         }
+        
     }
 
 
     void OnDisable()
     {
+        PriestHealth.OnBossDeath -= BossHealth_OnBossDeath;
         CancelInvoke();
     }
 }

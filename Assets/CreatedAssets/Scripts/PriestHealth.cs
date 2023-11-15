@@ -23,19 +23,22 @@ public class PriestHealth : MonoBehaviour
     // Function to deal damage to the boss.
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount; // Decrease the boss's health by the damage amount.
-
-        // You can add more logic here, such as updating UI elements to reflect the boss's health.
-
-        if (currentHealth <= 0)
+        if (enabled)
         {
-            UIManager.contractDefeated = true;
-            PriestAI priestAI = GetComponent<PriestAI>();
-            priestAI.enabled = false;
-            anim.SetTrigger("Dead");
-            OnBossDeath?.Invoke(this, EventArgs.Empty);
-            Invoke("Die", 5f);
+            currentHealth -= damageAmount; // Decrease the boss's health by the damage amount.
+
+            if (currentHealth <= 0)
+            {
+                Dead = true;
+                UIManager.contractDefeated = true;
+                PriestAI priestAI = GetComponent<PriestAI>();
+                priestAI.enabled = false;
+                anim.SetTrigger("Dead");
+                OnBossDeath?.Invoke(this, EventArgs.Empty);
+                Invoke("Die", 5f);
+            }
         }
+        
     }
 
     // Function to handle the boss's death.

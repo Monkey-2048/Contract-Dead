@@ -14,7 +14,7 @@ public class BatHealth : MonoBehaviour
 
     private void OrkHealth_OnOrkDeath(object sender, System.EventArgs e)
     {
-        Die();
+        TakeDamage(maxHealth);
     }
 
     // Function to allow other scripts to damage the bat
@@ -27,7 +27,7 @@ public class BatHealth : MonoBehaviour
             if (currentHealth <= 0)
             {
                 dead = true;
-                Die();
+                Destroy(gameObject);
             }
         }
     }
@@ -37,9 +37,9 @@ public class BatHealth : MonoBehaviour
         return dead;
     }
 
-    void Die()
+    private void OnDisable()
     {
-        // Handle bat death logic here (e.g., play death animation, remove or deactivate the bat, etc.)
-        Destroy(gameObject); // For example, destroy the bat game object when it dies
+        OrkHealth.OnOrkDeath -= OrkHealth_OnOrkDeath;
     }
+
 }

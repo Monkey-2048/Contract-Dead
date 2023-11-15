@@ -6,10 +6,14 @@ public class WinLoseUI : MonoBehaviour
 {
     [SerializeField] private Transform WinUI;
     [SerializeField] private Transform LoseUI;
+    public static bool WinActive;
+    public static bool LoseActive;
 
     // Start is called before the first frame update
     void Start()
     {
+        WinActive = false;
+        LoseActive = false;
         WinUI.gameObject.SetActive(false);
         LoseUI.gameObject.SetActive(false);
         PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
@@ -27,6 +31,7 @@ public class WinLoseUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         LoseUI.gameObject.SetActive(true);
+        LoseActive = true;
     }
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
@@ -39,6 +44,7 @@ public class WinLoseUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         WinUI.gameObject.SetActive(true);
+        WinActive = true;
     }
 
 

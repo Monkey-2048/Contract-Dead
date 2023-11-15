@@ -60,38 +60,39 @@ public class BulletScript : MonoBehaviour {
 					Destroy(gameObject);
 				}
 				if(hit.transform.tag == "Ork"){
-					if (BossActivationZone.playerEnteredZone)
-					{
-                        
-                    }
+					
                     OrkHealth bossHealth = hit.transform.GetComponent<OrkHealth>();
                     if (bossHealth != null)
                     {
-                        if (!bossHealth.IsDead())
+                        if (!OrkHealth.IsDead())
                         {
-                            bossHealth.TakeDamage(damage);
                             Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                            bossHealth.TakeDamage(damage);
                         }
                     }
                     Destroy(gameObject);
 				}
 				if(hit.transform.tag == "Bat"){
 					
-                    BatHealth batHealth = hit.transform.GetComponent<BatHealth>();
-                    if (batHealth != null)
-                    {
-                        if (!batHealth.IsDead())
+					if (!OrkHealth.IsDead())
+					{
+                        BatHealth batHealth = hit.transform.GetComponent<BatHealth>();
+                        if (batHealth != null)
                         {
-                            batHealth.TakeDamage(damage);
-                            Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                            if (!batHealth.IsDead())
+                            {
+                                batHealth.TakeDamage(damage);
+                            }
                         }
+
+                        Destroy(gameObject);
                     }
-                    Destroy(gameObject);
+                    
 				}
 			}		
 			Destroy(gameObject);
 		}
-		Destroy(gameObject, 1f);
+		Destroy(gameObject, 5f);
 	}
 
 }

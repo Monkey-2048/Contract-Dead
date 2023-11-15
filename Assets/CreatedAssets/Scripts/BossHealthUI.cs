@@ -24,12 +24,7 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        if (healthFillImage == null || bossHealth == null)
-        {
-            // Update the health bar fill amount based on the boss's current health.
-            UpdateHealthBarFill();
-        }
-        
+        UpdateHealthBarFill();
     }
 
     private void UpdateHealthBarFill()
@@ -39,5 +34,11 @@ public class HealthBar : MonoBehaviour
 
         // Set the health bar's fill amount.
         healthFillImage.fillAmount = fillAmount;
+        
+    }
+
+    private void OnDestroy()
+    {
+        PriestHealth.OnBossDeath -= BossHealth_OnBossDeath;
     }
 }

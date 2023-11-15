@@ -44,10 +44,9 @@ public class OrkAI : MonoBehaviour
     private void Update()
     {
 
-        if (orkHealth.IsDead())
+        if (OrkHealth.IsDead())
         {
             agent.isStopped = true;
-            enabled = false;
             return;
         }
 

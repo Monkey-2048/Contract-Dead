@@ -14,7 +14,7 @@ public class OrkHealthUI : MonoBehaviour
             Debug.LogError("HealthBar is missing references to healthFillImage or bossHealth.");
             enabled = false; // Disable the script if references are missing.
         }
-        PriestHealth.OnBossDeath += BossHealth_OnBossDeath;
+        OrkHealth.OnOrkDeath += BossHealth_OnBossDeath;
     }
 
     private void BossHealth_OnBossDeath(object sender, System.EventArgs e)
@@ -36,4 +36,10 @@ public class OrkHealthUI : MonoBehaviour
         // Set the health bar's fill amount.
         healthFillImage.fillAmount = fillAmount;
     }
+
+    private void OnDisable()
+    {
+        OrkHealth.OnOrkDeath -= BossHealth_OnBossDeath;
+    }
+
 }
